@@ -3,7 +3,7 @@ package de.frosner.replhelper
 import java.io.{ByteArrayOutputStream, PrintStream}
 
 import org.scalatest.{FlatSpec, Matchers}
-import Helper.NEWLINE
+import Helper.NewLine
 
 class HelperTest extends FlatSpec with Matchers {
   
@@ -93,7 +93,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(new TestClass().getClass)
     helper.printAllMethods(out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
         s"${Console.BOLD}a${Console.RESET} [TestClass]",
         "- help(): short help",
         "- xhelp(): short help",
@@ -109,7 +109,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(new TestClass().getClass)
     helper.printMethods("help", out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
         s"${Console.BOLD}help()${Console.RESET} [TestClass]",
         "long help",
         ""
@@ -122,7 +122,7 @@ class HelperTest extends FlatSpec with Matchers {
     val helper = Helper(new TestClass2().getClass)
     helper.printMethods("method", out)
     println(result.toString)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
       s"${Console.BOLD}method()${Console.RESET} [TestClass2]",
       "method without parameters",
       "",
@@ -137,7 +137,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(new TestClass3().getClass)
     helper.printAllMethods(out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
       s"${Console.BOLD}category${Console.RESET} [TestClass3]",
       "- method(1)(2)(3)(4)(5)(6)(7)(8)(9): short",
       ""
@@ -149,7 +149,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(new TestClass3().getClass)
     helper.printMethods("method", out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
       s"${Console.BOLD}method(1)(2)(3)(4)(5)(6)(7)(8)(9)${Console.RESET} [TestClass3]",
       "long",
       ""
@@ -161,7 +161,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(DummyObjectThatIsNoCompanion.getClass)
     helper.printMethods("method", out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
       s"${Console.BOLD}method()${Console.RESET} [DummyObjectThatIsNoCompanion]",
       "l",
       ""
@@ -173,7 +173,7 @@ class HelperTest extends FlatSpec with Matchers {
     val out = new PrintStream(result)
     val helper = Helper(DummyObjectThatIsNoCompanion.getClass)
     helper.printAllMethods(out)
-    result.toString.split(NEWLINE, -1) shouldBe Array(
+    result.toString.split(NewLine, -1) shouldBe Array(
       s"${Console.BOLD}c${Console.RESET} [DummyObjectThatIsNoCompanion]",
       "- method(): s",
       ""
