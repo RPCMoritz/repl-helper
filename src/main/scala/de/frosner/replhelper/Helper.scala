@@ -12,7 +12,7 @@ import java.io.PrintStream
  */
 case class Helper[T](classWithHelp: Class[T]) {
 
-  import Helper.NEWLINE
+  import Helper.NewLine
   type Name = String
   type ShortDescription = String
   type LongDescription = String
@@ -48,11 +48,11 @@ case class Helper[T](classWithHelp: Class[T]) {
   def printAllMethods(out: PrintStream) = out.println(
     methods.map {
       case (category, methods) => {
-        s"${Console.BOLD}${category}${Console.RESET} [$simpleClassName]" + NEWLINE + methods.map {
+        s"${Console.BOLD}${category}${Console.RESET} [$simpleClassName]" + NewLine + methods.map {
           case (name, help) => "- " + getMethodSignature(name, help) + s": ${help.shortDescription}"
-        }.mkString(NEWLINE)
+        }.mkString(NewLine)
       }
-    }.mkString(NEWLINE+NEWLINE)
+    }.mkString(NewLine+NewLine)
   )
 
   private def getMethodSignature(name: String, help: Help) = {
@@ -84,17 +84,17 @@ case class Helper[T](classWithHelp: Class[T]) {
         case (name, help) => getMethodSignature(name, help)
       }.map {
         methodWithHelp => getLongDescriptionPrintable(methodWithHelp, out)
-      }.mkString(NEWLINE+NEWLINE)
+      }.mkString(NewLine+NewLine)
     )
   }
 
   private def getLongDescriptionPrintable(methodWithHelp: (String, Help), out: PrintStream) = {
     val (name, help) = methodWithHelp
-    s"${Console.BOLD}${getMethodSignature(name, help)}${Console.RESET} [$simpleClassName]" + NEWLINE + help.longDescription
+    s"${Console.BOLD}${getMethodSignature(name, help)}${Console.RESET} [$simpleClassName]" + NewLine + help.longDescription
   }
 
 }
 
 object Helper {
-  val NEWLINE = System.getProperty("line.separator")
+  val NewLine = System.getProperty("line.separator")
 }
